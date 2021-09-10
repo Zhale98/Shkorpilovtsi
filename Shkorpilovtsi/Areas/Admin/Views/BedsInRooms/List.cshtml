@@ -1,0 +1,46 @@
+﻿@model List<BedsInRoom>
+
+<div class="col-12 pt-3 pb-3">
+    <a class="btn btn-primary" asp-action="create" asp-controller="bedsinrooms">ДОБАВИ ЛЕГО В СТАЯ</a>
+</div>
+<div class="col-12">
+    <div id="accordion">
+        @foreach (var group in Model.GroupBy((o) => o.RoomId))
+        {
+            <div class="card">
+                <div class="card-header" id="@String.Format("heading_{0}", group.Key)" title="@group.FirstOrDefault()?.Room?.Description">
+                    <div class="row col-12">
+                        <button class="btn btn-link text-dark" data-toggle="collapse" data-target="@String.Format("#collapse_{0}", group.Key)"
+                                aria-expanded="false" aria-controls="@String.Format("collapse_{0}", group.Key)">
+                            <i class="fa fa-caret-right mr-2"></i>
+                            <span>@group.FirstOrDefault()?.Room?.Name</span>
+                        </button>
+                        <a class="btn btn-link ml-2" asp-action="edit" asp-controller="room" asp-route-id="@group.Key"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-link ml-2" asp-action="confirmdelete" asp-controller="room" asp-route-id="@group.Key"><i class="fa fa-trash"></i></a>
+                    </div>                                        
+                </div>
+                <div id="@String.Format("collapse_{0}", group.Key)" class="collapse show" aria-labelledby="@String.Format("heading_{0}", group.Key)" 
+                     data-parent="#accordion">
+                    <div class="card-body">
+                        <p>Легла в стаята: </p>
+                        <ul>
+                            @if (group.FirstOrDefault()?.Room?.HasSofa == true)
+                            {
+                                <li>разтегателен диван</li>
+                            }
+                            @foreach (var item in group)
+                            {
+                                <li>
+                                    @item.Bed.Description
+                                    <a class="btn btn-link" asp-action="edit" asp-controller="bedsinrooms" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-link" asp-action="confirmdelete" asp-controller="bedsinrooms" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                                </li>
+                            }
+                        </ul>
+                        <p>Общо: @group.Sum((o) => Math.Truncate(o.Bed.Capacity)) човека</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>        
+</div>

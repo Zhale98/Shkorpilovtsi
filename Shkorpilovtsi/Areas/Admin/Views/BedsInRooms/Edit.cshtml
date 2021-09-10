@@ -1,0 +1,24 @@
+﻿@model BedsInRoom
+
+@{    
+    var beds = (List<Bed>)ViewBag.beds;
+}
+
+<h3 class="pt-3">ПРОМЯНА НА ЛЕГЛО В СТАЯ "@Model.Room.Name"</h3>
+
+<form asp-action="edit" asp-controller="bedsinrooms" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="RoomId">ИЗБЕРИ ВИД ЛЕГЛО</label>
+        <select asp-for="BedId" class="form-control">
+            @foreach (var bed in beds)
+            {
+                <option value="@bed.Id">@bed.Description</option>
+            }
+        </select>
+    </div>
+    <div class="form-group pt-3">
+        <a asp-action="list" asp-controller="bedsinrooms" class="btn btn-secondary">НАЗАД</a>
+        <button type="submit" class="btn btn-primary">ЗАПАЗИ</button>
+    </div>
+</form>

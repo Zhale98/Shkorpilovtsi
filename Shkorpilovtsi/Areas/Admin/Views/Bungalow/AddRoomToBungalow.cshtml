@@ -1,0 +1,35 @@
+﻿@model RoomsInBungalow
+
+@{
+    var rooms = (List<Room>)ViewBag.rooms;
+    var bungalows = (List<Bungalow>)ViewBag.bungalows;
+    var info = (string)ViewBag.info;
+}
+
+<h3 class="pt-3">ЗАДАВАНЕ НА СТАЯ В БУНГАЛО</h3>
+<h6 class="pt-2 text-info">@info</h6>
+
+<form asp-action="addroomtobungalow" asp-controller="bungalow" method="post">
+    <div class="form-group">
+        <label asp-for="RoomId">ИЗБЕРИ БУНГАЛО</label>
+        <select asp-for="BungalowId" class="form-control">
+            @foreach (var bungalow in bungalows)
+            {
+                <option value="@bungalow.Id">@bungalow.Number - @bungalow.Description</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="RoomId">ИЗБЕРИ СТАЯ</label>
+        <select asp-for="RoomId" class="form-control">
+            @foreach (var room in rooms)
+            {
+                <option value="@room.Id">@room.Description</option>
+            }
+        </select>
+    </div>
+    <div class="form-group pt-3">
+        <a asp-action="list" asp-controller="bungalow" class="btn btn-secondary">НАЗАД</a>
+        <button type="submit" class="btn btn-primary">ДОБАВИ</button>
+    </div>
+</form>

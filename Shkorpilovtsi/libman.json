@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "font-awesome@5.15.4",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "image-map-resizer@1.0.10",
+      "destination": "wwwroot/lib/image-map-resizer/"
+    },
+    {
+      "library": "maphilight@1.4.2",
+      "destination": "wwwroot/lib/maphilight/"
+    },
+    {
+      "library": "lightslider@1.1.6",
+      "destination": "wwwroot/lib/lightslider/"
+    },
+    {
+      "library": "justifiedGallery@3.8.1",
+      "destination": "wwwroot/lib/justifiedGallery/"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+
+<div class="container-fluid">
+    <a class="btn btn-primary" asp-action="add" asp-controller="role">ДОБАВИ ПОТРЕБИТЕЛСКА РОЛЯ</a>
+</div>
+<div class="container-fluid">
+    @foreach (var role in Model)
+     {
+        <div class="row">
+            <span>@role.Name</span>            
+            <a class="btn btn-link ml-2" asp-action="edit" asp-controller="role"><i class="fa fa-edit"></i></a>
+            <button class="btn btn-link ml-2"><i class="fa fa-trash"></i></button>
+        </div>
+     }
+</div>

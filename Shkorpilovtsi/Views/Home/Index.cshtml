@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "ПОЧИВНА БАЗА ШКОРПИЛОВЦИ";
+}
+
+@section header
+{
+    <partial name="components/navigation" />
+}
+
+<partial name="components/headerSection" />
+
+<partial name="components/aboutSection" />
+
+<partial name="components/map" />
+
+<partial name="components/gallerySection" />
+
+<partial name="components/footerSection" />
+
+<partial name="components/bungalowModal" />
+
+@section footer
+{
+    <div class="container text-center mb-3">
+        <div class="copyright">
+            &copy; @DateTime.Now.Year - Русенски Университет <strong><span>"Ангел Кънчев"</span></strong>.
+        </div>        
+    </div>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('body').scrollspy({ target: '#navigation', offset: 60 });
+            $('#heroGallery').lightSlider({
+                item: 3,
+                autoWidth: false,
+                slideMove: 1,
+                slideMargin: 10,
+            });
+            $("#galleryDiv").justifiedGallery();
+            InitializeMap();
+        });
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() < 100) {
+                $('#navigation').removeClass('bg-white');
+                $('#navigation').removeClass('navbar-light');
+                $('#navigation').removeClass('shadow');
+                $('#navigation').addClass('bg-transparent');
+                $('#navigation').addClass('navbar-dark');
+                $('#reserveButton').removeClass('text-dark');
+                $('#reserveButton').addClass('text-white');
+                $('#reserveButton').addClass('btn-outline-primary');
+                $('#reserveButton').removeClass('btn-outline-danger');
+            }
+            else {
+                $('#navigation').removeClass('bg-transparent');
+                $('#navigation').removeClass('navbar-dark');
+                $('#navigation').addClass('navbar-light');
+                $('#navigation').addClass('bg-white');
+                $('#navigation').addClass('shadow');
+                $('#reserveButton').removeClass('text-white');
+                $('#reserveButton').removeClass('btn-outline-primary');
+                $('#reserveButton').addClass('text-dark');
+                $('#reserveButton').addClass('btn-outline-danger');
+            }
+        });
+
+        $("[name='slider_image']").mouseover(function () {
+            $(this).removeClass("slider_image_opacity_low");
+            $(this).addClass("slider_image_opacity_high");
+        });
+        $("[name='slider_image']").mouseout(function () {
+            $(this).removeClass("slider_image_opacity_high");
+            $(this).addClass("slider_image_opacity_low");
+        });
+
+
+        function OnMapItemClick(id) {
+            var modal = $('#bungalow_modal');
+            var modalTitle = $('#bungalow_modal_title');
+            var modalText = $('#bungalow_modal_text');
+            var modalImage = $('#bungalow_modal_image');
+            modalTitle.html('Бунгало №' + id);
+            modalText.html("информация за бунгалото");
+            modalImage.attr('src', "/img/bungalows/" + id + ".jpg");
+            modal.modal('show');
+        }
+
+        function InitializeMap() {
+            $('map').imageMapResize();
+            $('img[usemap]').maphilight();
+            SetEvents();
+        }
+
+        function SetEvents() {
+            $('area[number]').click(function (e) {
+                e.preventDefault();
+                var id = $(this).attr('number');
+                OnMapItemClick(id);
+            });
+            $('area[object]').click(function (e) {
+                e.preventDefault();
+            });
+            $("area[category]").mouseover(function (e) {
+                var category = $(this).attr('category');
+                $("area[" + category + "]").mouseover();
+            }).mouseout(function (e) {
+                var category = $(this).attr('category');
+                $("area[" + category + "]").mouseout();
+            });
+        }
+
+    </script>
+}

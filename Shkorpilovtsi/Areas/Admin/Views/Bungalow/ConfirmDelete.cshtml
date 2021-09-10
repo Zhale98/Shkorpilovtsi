@@ -1,0 +1,39 @@
+﻿@model Bungalow
+
+<h3 class="pt-3 pb-3">СИГУРНИ ЛИ СТЕ, ЧЕ ИСКАТЕ ДА ИЗТРИЕТЕ ИНФОРМАЦИЯТА ЗА БУНГАЛО №@Model.Id</h3>
+
+
+<div class="form-group">
+    <label style="font-size: 1em;" asp-for="Description" class="col-3"></label>
+    <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.Description</label>
+</div>
+<div class="form-group">
+    <label style="font-size: 1em;" asp-for="IsActive" class="col-3"></label>
+    <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.Description</label>
+</div>
+<div class="form-group">
+    <label style="font-size: 1em;" asp-for="IsAvailable" class="col-3"></label>
+    @if (Model.IsAvailable)
+    {
+        <label style="font-size: 1em;" class="font-weight-bold col-8">ДА</label>
+    }
+    else
+    {
+        <label style="font-size: 1em;" class="font-weight-bold col-8">НЕ</label>
+    }
+</div>
+<div class="form-group">
+    <label style="font-size: 1em;" asp-for="IsAvailable" class="col-3"></label>
+    @if (Model.IsAvailable)
+    {
+        <label style="font-size: 1em;" class="font-weight-bold col-8">ДА</label>
+    }
+    else
+    {
+        <label style="font-size: 1em;" class="font-weight-bold col-8">НЕ</label>
+    }
+</div>
+<div class="form-group pt-3">
+    <a asp-action="list" asp-controller="bungalow" class="btn btn-secondary">НАЗАД</a>
+    <a class="btn btn-danger" asp-action="delete" asp-controller="bungalow" asp-route-id="@Model.Id">ИЗТРИИ</a>
+</div>

@@ -1,0 +1,30 @@
+﻿@model Bungalow
+
+<h3 class="pt-3">СЪЗДАВАНЕ НА НОВО БУНГАЛО</h3>
+
+<form asp-action="create" asp-controller="bungalow" method="post">
+    <div class="form-group">
+        <label asp-for="Number"></label>
+        <input asp-for="Number" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="MapCoords"></label>
+        <input asp-for="MapCoords" class="form-control" />
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" asp-for="IsAvailable">
+        <label class="form-check-label" asp-for="IsAvailable"></label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" asp-for="IsActive">
+        <label class="form-check-label" asp-for="IsActive"></label>
+    </div>
+    <div class="form-group pt-3">
+        <a asp-action="list" asp-controller="bungalow" class="btn btn-secondary">НАЗАД</a>
+        <button type="submit" class="btn btn-primary">СЪЗДАЙ</button>
+    </div>
+</form>

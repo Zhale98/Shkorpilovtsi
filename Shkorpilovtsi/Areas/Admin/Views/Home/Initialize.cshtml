@@ -1,0 +1,46 @@
+﻿@model InitializationModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />    
+</head>
+<body>
+    <form method="post">
+        <div class="container vh-100">
+            <div class="row h-100 align-items-center">                
+                <div class="card shadow m-auto">
+                    <div class="card-header bg-white">
+                        <h6 class="text-secondary">ВЪВЕДЕТЕ ДАННИ ЗА АДМИНИСТРАТОР</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input type="email" asp-for="Email" class="form-control form-control-sm" />
+                            <span style="font-size: 0.8em" class="text-danger">@Html.ValidationMessageFor((m) => m.Email)</span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input type="password" asp-for="Password" class="form-control form-control-sm" />
+                            <span style="font-size: 0.8em" class="text-danger">@Html.ValidationMessageFor((m) => m.Password)</span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <button type="submit" class="btn btn-sm btn-primary">ЗАПАЗИ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.js"></script>
+</body>
+</html>

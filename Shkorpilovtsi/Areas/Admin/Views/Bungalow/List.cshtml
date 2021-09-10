@@ -1,0 +1,87 @@
+﻿@model List<Bungalow>
+
+@{ 
+    var rooms = (List<RoomsInBungalow>)ViewBag.rooms;
+}
+
+<div class="col-12 pt-3 pb-3">
+    <a class="btn btn-primary" asp-action="create" asp-controller="bungalow">ДОБАВИ НОВО БУНГАЛО</a>
+</div>
+<div class="col-12">
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>ОПИСАНИЕ</th>
+                <th class="text-center">САНИТАРЕН ВЪЗЕЛ</th>
+                <th class="text-center">ХЛАДИЛНИК</th>
+                <th class="text-center">РАЗТЕГАТЕЛЕН ДИВАН</th>
+                <th class="text-center">СВОБОДНО</th>
+                <th colspan="2" >АКТИВНО</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>                    
+                    <td class="col-1">@Model[i].Number</td>
+                    <td class="col-3">@Model[i].Description</td>
+                    <td class="col-2 text-center">
+                        @if (rooms.Where((r) => r.BungalowId == Model[i].Id).Any((r) => r.Room.IsWc))
+                        {
+                            <span>да</span>
+                        }
+                        else
+                        {
+                            <span>не</span>
+                        }
+                    </td>
+                    <td class="col-1 text-center">
+                        @if (rooms.Where((r) => r.BungalowId == Model[i].Id).Any((r) => r.Room.HasFridge))
+                        {
+                            <span>да</span>
+                        }
+                        else
+                        {
+                            <span>не</span>
+                        }
+                    </td>
+                    <td class="col-2 text-center">
+                        @if (rooms.Where((r) => r.BungalowId == Model[i].Id).Any((r) => r.Room.HasSofa))
+                        {
+                            <span>да</span>
+                        }
+                        else
+                        {
+                            <span>не</span>
+                        }
+                    </td>
+                    <td class="col-1 text-center">
+                        @if (Model[i].IsAvailable)
+                        {
+                            <span>да</span>
+                        }
+                        else
+                        {
+                            <span>не</span>
+                        }                        
+                    </td>
+                     <td class="col-1 text-center">
+                        @if (Model[i].IsActive)
+                        {
+                            <span>да</span>
+                        }
+                        else
+                        {
+                            <span>не</span>
+                        }                        
+                    </td>
+                    <td class="col-1">
+                        <a class="btn btn-link" asp-action="Edit" asp-controller="bungalow" asp-route-id="@Model[i].Id"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-link" asp-action="ConfirmDelete" asp-controller="bungalow" asp-route-id="@Model[i].Id"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
