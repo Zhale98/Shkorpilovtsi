@@ -1,0 +1,35 @@
+﻿@model List<UserModel>
+
+@{
+    var categories = (List<Shkorpilovtsi.Models.Category>)ViewBag.categories;
+}
+
+<div class="col-12 pt-3 pb-3">
+    <a class="btn btn-primary" asp-action="create" asp-controller="user">ДОБАВИ НОВ ПОТРЕБИТЕЛ</a>
+</div>
+<div class="col-12">
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Е-МЕЙЛ</th>
+                <th>КАТЕГОРИЯ</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Model[i].Email</td> 
+                    <td>@(categories.FirstOrDefault((c) => c.Id == Model[i].CategoryId)?.Name ?? "няма")</td>
+                    <td>
+                        <a class="btn btn-link" asp-action="Edit" asp-controller="user" asp-route-id="@Model[i].Id"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-link" asp-action="ConfirmDelete" asp-controller="user" asp-route-id="@Model[i].Id"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

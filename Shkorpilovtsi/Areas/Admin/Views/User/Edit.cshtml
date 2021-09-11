@@ -1,0 +1,31 @@
+﻿@model UserModel
+
+@{
+    var categories = (List<Shkorpilovtsi.Models.Category>)ViewBag.categories;
+}
+
+<form method="post">
+    <div class="container vh-100">
+        <div class="row h-100 align-items-center">
+            <div class="card shadow m-auto">
+                <div class="card-header bg-white">
+                    <h6 class="text-secondary">РЕДАКТИРАНЕ НА ДАННИТЕ ЗА ПОТРЕБИТЕЛ "@Model.Email"</h6>
+                </div>
+                <div class="card-body">                    
+                    <div class="form-group">
+                        <label asp-for="CategoryId">ИЗБЕРИ КАТЕГОРИЯ</label>
+                        <select asp-for="CategoryId" class="form-control form-control-sm">
+                            @foreach (var category in categories)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="card-footer bg-white">
+                    <button type="submit" class="btn btn-sm btn-primary">ЗАПАЗИ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>    

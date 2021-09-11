@@ -1,7 +1,7 @@
 ﻿@model UserModel
 
 @{
-    var roles = (List<Microsoft.AspNetCore.Identity.IdentityRole>)ViewBag.rolse;
+    var categories = (List<Shkorpilovtsi.Models.Category>)ViewBag.categories;
 }
 
 <form method="post">
@@ -23,11 +23,11 @@
                         <span style="font-size: 0.8em" class="text-danger">@Html.ValidationMessageFor((m) => m.Password)</span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="RoleId"></label>
-                        <select asp-for="RoleId" class="form-control form-control-sm">
-                            @foreach (var role in roles)
+                        <label asp-for="CategoryId">ИЗБЕРИ КАТЕГОРИЯ</label>
+                        <select asp-for="CategoryId" class="form-control form-control-sm">
+                            @foreach (var category in categories)
                             {
-                                <option value="@role.Id">@role.Name</option>
+                                <option value="@category.Id">@category.Name</option>
                             }
                         </select>
                     </div>

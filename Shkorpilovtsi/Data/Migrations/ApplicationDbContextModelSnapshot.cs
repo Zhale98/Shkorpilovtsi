@@ -279,6 +279,20 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.ToTable("Bungalows");
                 });
 
+            modelBuilder.Entity("Shkorpilovtsi.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("Shkorpilovtsi.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -324,6 +338,23 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("RoomsInBungalows");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.UserCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

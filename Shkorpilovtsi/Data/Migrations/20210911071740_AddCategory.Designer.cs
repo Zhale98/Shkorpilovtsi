@@ -9,8 +9,8 @@ using Shkorpilovtsi.Data;
 namespace Shkorpilovtsi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210908112726_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210911071740_AddCategory")]
+    partial class AddCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -255,11 +255,54 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.ToTable("BedsInRooms");
                 });
 
+            modelBuilder.Entity("Shkorpilovtsi.Models.Bungalow", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("MapCoords")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bungalows");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("Shkorpilovtsi.Models.Room", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("HasFridge")
                         .HasColumnType("tinyint(1)");
@@ -276,6 +319,27 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.RoomsInBungalow", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BungalowId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BungalowId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomsInBungalows");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -344,6 +408,25 @@ namespace Shkorpilovtsi.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Bed");
+
+                    b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.RoomsInBungalow", b =>
+                {
+                    b.HasOne("Shkorpilovtsi.Models.Bungalow", "Bungalow")
+                        .WithMany()
+                        .HasForeignKey("BungalowId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shkorpilovtsi.Models.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bungalow");
 
                     b.Navigation("Room");
                 });

@@ -11,7 +11,7 @@ namespace Shkorpilovtsi.Areas.Admin.Models
     {
         [Display(Name = "е-мейл")]
         public string Email { get; set; }
-        [Display(Name = "парола")]
-        public string Password { get; set; }
+        [Display(Name = "парола")]        
+        public string Password { get; set; }        
     }
 }

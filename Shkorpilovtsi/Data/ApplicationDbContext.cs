@@ -24,10 +24,12 @@ namespace Shkorpilovtsi.Data
             base.OnModelCreating(builder);
         }
 
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Bed> Beds { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Bungalow> Bungalows { get; set; }
         public virtual DbSet<BedsInRoom> BedsInRooms { get; set; }
         public virtual DbSet<RoomsInBungalow> RoomsInBungalows { get; set; }
+        public virtual DbSet<UserCategory> UserCategories {  get; set; }
     }
 }

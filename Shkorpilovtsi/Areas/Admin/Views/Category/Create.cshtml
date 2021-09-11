@@ -1,0 +1,14 @@
+﻿@model Category
+
+<h3 class="pt-3">СЪЗДАВАНЕ НА КАТЕГОРИЯ</h3>
+
+<form asp-action="create" asp-controller="category" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group pt-3">
+        <a asp-action="list" asp-controller="category" class="btn btn-secondary">НАЗАД</a>
+        <button type="submit" class="btn btn-primary">СЪЗДАЙ</button>
+    </div>
+</form>

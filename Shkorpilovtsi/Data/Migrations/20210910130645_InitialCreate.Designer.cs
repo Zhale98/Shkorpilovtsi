@@ -9,8 +9,8 @@ using Shkorpilovtsi.Data;
 namespace Shkorpilovtsi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210909120126_Bungalows")]
-    partial class Bungalows
+    [Migration("20210910130645_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,7 +1,7 @@
-﻿@model List<Room>
+﻿@model List<Category>
 
 <div class="col-12 pt-3 pb-3">
-    <a class="btn btn-primary" asp-action="create" asp-controller="room">ДОБАВИ НОВА СТАЯ</a>
+    <a class="btn btn-primary" asp-action="create" asp-controller="category">ДОБАВИ НОВА СТАЯ</a>
 </div>
 <div class="col-12">
     <table class="table table-responsive">
@@ -17,11 +17,10 @@
             {
                 <tr>
                     <td class="col-1">@(i + 1)</td>
-                    <td class="col-2">@Model[i].Name</td>
-                    <td class="col-8">@Model[i].Description</td>
+                    <td class="col-2">@Model[i].Name</td>                    
                     <td class="col-1">
-                        <a class="btn btn-link" asp-action="Edit" asp-controller="room" asp-route-id="@Model[i].Id"><i class="fa fa-edit"></i></a>
-                        <a class="btn btn-link" asp-action="ConfirmDelete" asp-controller="room" asp-route-id="@Model[i].Id"><i class="fa fa-trash"></i></a>
+                        <a class="btn btn-link" asp-action="Edit" asp-controller="category" asp-route-id="@Model[i].Id"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-link" asp-action="ConfirmDelete" asp-controller="category" asp-route-id="@Model[i].Id"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             }
