@@ -8,11 +8,11 @@
 
 
 <div class="form-group">
-    <label style="font-size: 1em;" asp-for="Email" class="col-3"></label>
+    <label style="font-size: 1em;" asp-for="Email" class="col-3">Е-МЕЙЛ</label>
     <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.Email</label>
 </div>
 <div class="form-group">
-    <label style="font-size: 1em;" class="col-3">РОЛЯ</label>
+    <label style="font-size: 1em;" class="col-3">КАТЕГОРИЯ</label>
     <label style="font-size: 1em;" class="font-weight-bold col-8">
         @(categories.FirstOrDefault((c) => c.Id == Model.CategoryId)?.Name ?? "няма") 
     </label>

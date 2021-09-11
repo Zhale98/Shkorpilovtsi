@@ -24,7 +24,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
         }
 
         [HttpGet("Create")]
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> Create()
         {
             var categories = await context.Categories.ToListAsync();
             ViewData.Add("categories", categories);
@@ -32,7 +32,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Add(UserModel model)
+        public async Task<IActionResult> Create(UserModel model)
         {
             var user = await userManager.FindByNameAsync(model.Email);
             if (user == null)
