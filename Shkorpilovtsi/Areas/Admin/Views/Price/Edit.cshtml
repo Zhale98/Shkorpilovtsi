@@ -1,0 +1,41 @@
+﻿@model Price
+
+@{
+    var shifts = (List<Shift>)ViewBag.shifts;
+    var categories = (List<Category>)ViewBag.categories;
+}
+
+<h3 class="pt-3">РЕДАКТИРАНЕ НА ЦЕНА</h3>
+
+<form asp-action="edit" asp-controller="price" method="post">
+    <div class="form-group">
+        <label asp-for="ShiftId">ИЗБЕРЕТЕ СМЯНА</label>
+        <select asp-for="ShiftId" class="form-control">
+            @foreach (var shift in shifts)
+            {
+                <option value="@shift.Id">@shift.Number</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId">ИЗБЕРЕТЕ КАТЕГОРИЯ</label>
+        <select asp-for="CategoryId" class="form-control">
+            @foreach (var category in categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="SingleDayPrice"></label>
+        <input asp-for="SingleDayPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="FullPrice"></label>
+        <input asp-for="FullPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+        <a asp-action="list" asp-controller="price" class="btn btn-secondary">НАЗАД</a>
+        <button type="submit" class="btn btn-primary">ЗАПАЗИ</button>
+    </div>
+</form>

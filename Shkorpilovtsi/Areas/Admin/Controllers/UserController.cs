@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shkorpilovtsi.Areas.Admin.Models;
@@ -22,7 +23,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
             this.userManager = userManager;
             this.context = context;
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
@@ -30,7 +31,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
             ViewData.Add("categories", categories);
             return View();
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpPost("Create")]
         public async Task<IActionResult> Create(UserModel model)
         {
@@ -57,7 +58,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(List));
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet("Edit")]
         public async Task<IActionResult> Edit(string id)
         {
@@ -73,7 +74,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
             ViewData.Add("categories", categories);
             return View(model);
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet("ConfirmDelete")]
         public async Task<IActionResult> ConfirmDelete(string id)
         {
@@ -89,7 +90,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
             ViewData.Add("categories", categories);
             return View(model);
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpPost("Edit")]
         public async Task<IActionResult> Edit(UserModel model)
         {
@@ -109,7 +110,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpPost("Delete")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -122,7 +123,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
             }                        
             return RedirectToAction(nameof(List));
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet("List")]
         public async Task<IActionResult> List()
         {

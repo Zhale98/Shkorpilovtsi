@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,19 +19,20 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
         {
             this.roleManager = roleManager;
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet("[controller]/List")]
         public async Task<IActionResult> List()
         {
             var model = await roleManager.Roles.ToListAsync();
             return View(model);
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet("[controller]/Add")]
         public IActionResult Add()
         {            
             return View();
         }
+        [Authorize(Roles = "Administrator")]
         [HttpPost("[controller]/Add")]
         public async Task<IActionResult> Add(IdentityRole model)
         {
@@ -45,13 +47,14 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
                 return View(model);
             }
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet("[controller]/Edit")]
         public async Task<IActionResult> Edit(string id)
         {
             var model = await roleManager.FindByIdAsync(id);
             return View(model);
         }
+        [Authorize(Roles = "Administrator")]
         [HttpGet("[controller]/Edit")]
         public async Task<IActionResult> Edit(IdentityRole model)
         {
@@ -66,6 +69,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
                 return View(model);
             }
         }
+        [Authorize(Roles = "Administrator")]
         [HttpGet("[controller]/delete")]
         public async Task<IActionResult> Delete(string id)
         {

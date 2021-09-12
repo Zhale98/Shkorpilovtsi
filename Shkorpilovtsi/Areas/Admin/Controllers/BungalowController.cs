@@ -33,7 +33,9 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
         public override async Task<IActionResult> List()
         {
             var roomsInBungalows = await context.RoomsInBungalows.Include((o) => o.Room).ToListAsync();
+            var bedsInRooms = await context.BedsInRooms.Include((o) => o.Bed).ToListAsync();
             ViewData.Add("rooms", roomsInBungalows);
+            ViewData.Add("bedsInRooms", bedsInRooms);
             return await base .List();
         }
         [Authorize(Roles = "Administrator")]

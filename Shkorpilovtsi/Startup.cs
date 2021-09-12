@@ -41,6 +41,8 @@ namespace Shkorpilovtsi
             services.AddTransient<IDataService<Bungalow>, BunagalowService>();
             services.AddTransient<IDataService<BedsInRoom>, BedInRoomService>();
             services.AddTransient<IDataService<Category>, CategoryService>();
+            services.AddTransient<IDataService<Shift>, ShiftService>();
+            services.AddTransient<IDataService<Price>, PriceService>();
             services.AddControllersWithViews();
         }
 

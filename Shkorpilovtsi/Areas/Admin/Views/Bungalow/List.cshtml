@@ -2,6 +2,7 @@
 
 @{ 
     var rooms = (List<RoomsInBungalow>)ViewBag.rooms;
+    var bedsInRooms = (List<BedsInRoom>)ViewBag.bedsInRooms;
 }
 
 <div class="col-12 pt-3 pb-3">
@@ -13,21 +14,43 @@
             <tr>
                 <th>№</th>
                 <th>ОПИСАНИЕ</th>
+                <th>ЛЕГЛА</th>
+                <th>КАПАЦИТЕТ</th>
                 <th class="text-center">САНИТАРЕН ВЪЗЕЛ</th>
                 <th class="text-center">ХЛАДИЛНИК</th>
                 <th class="text-center">РАЗТЕГАТЕЛЕН ДИВАН</th>
                 <th class="text-center">СВОБОДНО</th>
-                <th colspan="2" >АКТИВНО</th>
+                <th colspan="2">АКТИВНО</th>
             </tr>
         </thead>
         <tbody>
             @for (int i = 0; i < Model.Count; i++)
             {
+                var bungaloRooms = rooms.Where((r) => r.BungalowId == Model[i].Id);
+                decimal capacity = 0;
                 <tr>                    
-                    <td class="col-1">@Model[i].Number</td>
-                    <td class="col-3">@Model[i].Description</td>
-                    <td class="col-2 text-center">
-                        @if (rooms.Where((r) => r.BungalowId == Model[i].Id).Any((r) => r.Room.IsWc))
+                    <td>@Model[i].Number</td>
+                    <td>@Model[i].Description</td>
+                    <td>
+                        @foreach (var bungaloRoom in bungaloRooms)
+                        {
+                            var bedsInRoom = bedsInRooms.Where((o) => o.RoomId == bungaloRoom.RoomId).ToList();
+                            if (bedsInRoom.Any())
+                            {
+                                foreach (var bedInRoom in bedsInRoom)
+                                {
+                                    capacity += bedInRoom.Bed.Capacity;                                    
+                                    <i class="fa fa-bed"></i>
+                                    <span class="mr-1">
+                                        @bedInRoom.Bed.Capacity
+                                    </span>
+                                };
+                            }
+                        }
+                    </td>
+                    <td>@capacity</td>
+                    <td text-center">
+                        @if (bungaloRooms.Any((r) => r.Room.IsWc))
                         {
                             <span>да</span>
                         }
@@ -36,8 +59,8 @@
                             <span>не</span>
                         }
                     </td>
-                    <td class="col-1 text-center">
-                        @if (rooms.Where((r) => r.BungalowId == Model[i].Id).Any((r) => r.Room.HasFridge))
+                    <td class="text-center">
+                        @if (bungaloRooms.Any((r) => r.Room.HasFridge))
                         {
                             <span>да</span>
                         }
@@ -46,7 +69,7 @@
                             <span>не</span>
                         }
                     </td>
-                    <td class="col-2 text-center">
+                    <td class="text-center">
                         @if (rooms.Where((r) => r.BungalowId == Model[i].Id).Any((r) => r.Room.HasSofa))
                         {
                             <span>да</span>
@@ -56,7 +79,7 @@
                             <span>не</span>
                         }
                     </td>
-                    <td class="col-1 text-center">
+                    <td class="text-center">
                         @if (Model[i].IsAvailable)
                         {
                             <span>да</span>
@@ -66,7 +89,7 @@
                             <span>не</span>
                         }                        
                     </td>
-                     <td class="col-1 text-center">
+                     <td class="text-center">
                         @if (Model[i].IsActive)
                         {
                             <span>да</span>
@@ -76,7 +99,7 @@
                             <span>не</span>
                         }                        
                     </td>
-                    <td class="col-1">
+                    <td>
                         <a class="btn btn-link" asp-action="Edit" asp-controller="bungalow" asp-route-id="@Model[i].Id"><i class="fa fa-edit"></i></a>
                         <a class="btn btn-link" asp-action="ConfirmDelete" asp-controller="bungalow" asp-route-id="@Model[i].Id"><i class="fa fa-trash"></i></a>
                     </td>

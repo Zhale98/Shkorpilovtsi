@@ -1,0 +1,24 @@
+﻿@model Price
+
+<h3 class="pt-3 pb-3">СИГУРНИ ЛИ СТЕ, ЧЕ ИСКАТЕ ДА ИЗТРИЕТЕ ЗАДАДЕНАТА ЦЕНА</h3>
+
+<div class="form-group">
+    <label style="font-size: 1em;" asp-for="Shift.Number" class="col-3"></label>
+    <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.Shift.Number</label>
+</div>
+<div class="form-group">
+    <label style="font-size: 1em;" asp-for="Category.Name" class="col-3"></label>
+    <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.Category.Name</label>
+</div>
+<div class="form-group">
+    <label style="font-size: 1em;" asp-for="SingleDayPrice" class="col-3"></label>
+    <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.SingleDayPrice</label>
+</div>
+<div class="form-group">
+    <label style="font-size: 1em;" asp-for="FullPrice" class="col-3"></label>
+    <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.FullPrice</label>
+</div>
+<div class="form-group">
+    <a asp-action="list" asp-controller="price" class="btn btn-secondary">НАЗАД</a>
+    <a class="btn btn-danger" asp-action="delete" asp-controller="price" asp-route-id="@Model.Id">ИЗТРИИ</a>
+</div>

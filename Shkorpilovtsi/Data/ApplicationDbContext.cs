@@ -31,5 +31,8 @@ namespace Shkorpilovtsi.Data
         public virtual DbSet<BedsInRoom> BedsInRooms { get; set; }
         public virtual DbSet<RoomsInBungalow> RoomsInBungalows { get; set; }
         public virtual DbSet<UserCategory> UserCategories {  get; set; }
+        public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<Price> Prices { get; set; }
+        public virtual DbSet<SpecialFee> SpecialFees { get; set; }
     }
 }

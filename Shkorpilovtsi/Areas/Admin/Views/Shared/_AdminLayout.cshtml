@@ -35,11 +35,13 @@
                         <a class="collapse-item" asp-action="create" asp-controller="user">нов потребител</a>
                         <a class="collapse-item" asp-action="list" asp-controller="user">списък</a>
                         <h6 class="collapse-header">Смени:</h6>
-                        <a class="collapse-item" href="buttons.html">нова смяна</a>
-                        <a class="collapse-item" href="cards.html">редакция</a>
+                        <a class="collapse-item" asp-action="create" asp-controller="shift">нова смяна</a>
+                        <a class="collapse-item" asp-action="list" asp-controller="shift">редакция</a>
                         <h6 class="collapse-header">Цени:</h6>
-                        <a class="collapse-item" href="cards.html">редакция</a>
-                        <a class="collapse-item" href="cards.html">зареждане от excel</a>
+                        <a class="collapse-item" asp-action="create" asp-controller="price">задаване на цена</a>
+                        <a class="collapse-item" asp-action="list" asp-controller="price">преглед на цените</a>
+                        <h6 class="collapse-header">Такси:</h6>
+                        <a class="collapse-item" href="cards.html">задаване на такса</a>                        
                     </div>
                 </div>
             </li>
@@ -135,7 +137,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Администратор</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <i class="fa fa-user-tie"></i>
+                                <!-- <img class="img-profile rounded-circle" src="img/undraw_profile.svg"> -->
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
