@@ -9,17 +9,18 @@
             <tr>
                 <th>№</th>
                 <th>НАИМЕНОВАНИЕ</th>
-                <th colspan="2">ОПИСАНИЕ</th>
+                <th>ОПИСАНИЕ</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @for (int i = 0; i < Model.Count; i++)
             {
                 <tr>
-                    <td class="col-1">@(i + 1)</td>
-                    <td class="col-2">@Model[i].Name</td>
-                    <td class="col-8">@Model[i].Description</td>
-                    <td class="col-1">
+                    <td>@(i + 1)</td>
+                    <td>@Model[i].Name</td>
+                    <td>@Model[i].Description</td>
+                    <td>
                         <a class="btn btn-link" asp-action="Edit" asp-controller="room" asp-route-id="@Model[i].Id"><i class="fa fa-edit"></i></a>
                         <a class="btn btn-link" asp-action="ConfirmDelete" asp-controller="room" asp-route-id="@Model[i].Id"><i class="fa fa-trash"></i></a>
                     </td>

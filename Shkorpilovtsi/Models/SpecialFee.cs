@@ -11,7 +11,9 @@ namespace Shkorpilovtsi.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "НАИМЕНОВАНИЕ")]
         public string Name { get; set; }
+        [Display(Name = "ЦЕНА")]
         [Column(TypeName = "decimal(18,2)")]        
         public decimal Price { get; set; }
     }

@@ -8,17 +8,17 @@
         <thead>
             <tr>
                 <th>№</th>
-                <th>НАИМЕНОВАНИЕ</th>
-                <th colspan="2">ОПИСАНИЕ</th>
+                <th>НАИМЕНОВАНИЕ</th>                
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @for (int i = 0; i < Model.Count; i++)
             {
                 <tr>
-                    <td class="col-1">@(i + 1)</td>
-                    <td class="col-2">@Model[i].Name</td>                    
-                    <td class="col-1">
+                    <td>@(i + 1)</td>
+                    <td>@Model[i].Name</td>                    
+                    <td>
                         <a class="btn btn-link" asp-action="Edit" asp-controller="category" asp-route-id="@Model[i].Id"><i class="fa fa-edit"></i></a>
                         <a class="btn btn-link" asp-action="ConfirmDelete" asp-controller="category" asp-route-id="@Model[i].Id"><i class="fa fa-trash"></i></a>
                     </td>

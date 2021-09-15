@@ -18,9 +18,9 @@
                 <th>КАПАЦИТЕТ</th>
                 <th class="text-center">САНИТАРЕН ВЪЗЕЛ</th>
                 <th class="text-center">ХЛАДИЛНИК</th>
-                <th class="text-center">РАЗТЕГАТЕЛЕН ДИВАН</th>
-                <th class="text-center">СВОБОДНО</th>
-                <th colspan="2">АКТИВНО</th>
+                <th class="text-center">РАЗТЕГАТЕЛЕН ДИВАН</th>                
+                <th>АКТИВНО</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -78,17 +78,7 @@
                         {
                             <span>не</span>
                         }
-                    </td>
-                    <td class="text-center">
-                        @if (Model[i].IsAvailable)
-                        {
-                            <span>да</span>
-                        }
-                        else
-                        {
-                            <span>не</span>
-                        }                        
-                    </td>
+                    </td>                    
                      <td class="text-center">
                         @if (Model[i].IsActive)
                         {

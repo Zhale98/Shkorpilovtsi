@@ -14,9 +14,7 @@ namespace Shkorpilovtsi.Models
         [Display(Name = "НОМЕР НА БУНАЛО")]
         public int Number { get; set; }
         [Display(Name = "ОПИСАНИЕ НА БУНАЛО")]
-        public string Description { get; set; }
-        [Display(Name = "СВОБОДНО")]
-        public bool IsAvailable { get; set; }
+        public string Description { get; set; }        
         [Display(Name = "АКТИВНО")]
         public bool IsActive { get; set; }
         [Display(Name = "КООРДИНАТИ НА КАРТАТА")]

@@ -1,0 +1,18 @@
+﻿@model SpecialFee
+
+<h3 class="pt-3">СЪЗДАВАНЕ НА НОВА ТАКСА</h3>
+
+<form asp-action="create" asp-controller="fee" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <div class="form-group">
+        <a asp-action="list" asp-controller="fee" class="btn btn-secondary">НАЗАД</a>
+        <button type="submit" class="btn btn-primary">СЪЗДАЙ</button>
+    </div>
+</form>

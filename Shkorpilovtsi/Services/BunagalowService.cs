@@ -62,8 +62,7 @@ namespace Shkorpilovtsi.Services
             {
                 entry.Number = bungalow.Number;
                 entry.Description = bungalow.Description;
-                entry.IsActive = bungalow.IsActive;
-                entry.IsAvailable = bungalow.IsAvailable;
+                entry.IsActive = bungalow.IsActive;                
                 entry.MapCoords = bungalow.MapCoords;                
                 await context.SaveChangesAsync();
             }

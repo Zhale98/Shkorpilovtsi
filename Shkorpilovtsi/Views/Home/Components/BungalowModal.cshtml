@@ -1,8 +1,10 @@
-﻿<div class="modal" tabindex="-1" role="dialog" id="bungalow_modal">
+﻿@model BungalowViewModel
+
+<div class="modal" tabindex="-1" role="dialog" id="bungalow_modal">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="bungalow_modal_title"></h5>
+                <h5 class="modal-title" id="bungalow_modal_title">БУНГАЛО №@Model.Number</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,7 +15,29 @@
                         <img class="img-fluid bungalow_image" alt="" src="" id="bungalow_modal_image" />
                     </div>
                     <div class="col">
-                        <p id="bungalow_modal_text" class="text-center"></p>
+                       <h6>@Model.Description</h6>
+                       @foreach (var room in Model.Rooms)
+                       {
+                           <span class="font-weight-bold"><i class="fa fa-caret-right"></i> @room.Name</span>
+                           <ul class="list-unstyled">
+                               @if (room.HasFridge)
+                               {
+                                   <li class="ml-2"><i class="fa fa-snowflake"></i> Хладилник</li>
+                               }
+                               @if (room.IsWc)
+                               {
+                                   <li class="ml-2"><i class="fas fa-toilet"></i> Санитарен възел</li>
+                               }
+                               @if (room.HasSofa)
+                               {
+                                   <li class="ml-2"><i class="fas fa-couch"></i> Разтегателен диван</li>
+                               }
+                               @foreach (var bed in Model.BedsInRooms.Where((r) => r.RoomId == room.Id).Select((o) => o.Bed))
+                               {
+                                   <li class="ml-2"><i class="fa fa-bed"></i> @bed.Description</li>
+                               }
+                           </ul>
+                       }
                     </div>
                 </div>
             </div>

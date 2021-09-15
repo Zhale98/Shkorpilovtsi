@@ -11,13 +11,17 @@
 
 <partial name="components/aboutSection" />
 
-<partial name="components/map" />
+<div id="mapPlaceholder">
+
+</div>
 
 <partial name="components/gallerySection" />
 
 <partial name="components/footerSection" />
 
-<partial name="components/bungalowModal" />
+<div id="bungalowModalPlaceholder">
+
+</div>
 
 @section footer
 {
@@ -40,7 +44,14 @@
                 slideMargin: 10,
             });
             $("#galleryDiv").justifiedGallery();
-            InitializeMap();
+            $.ajax({
+                url: "/home/getmap",
+                method: "GET"
+            }).done(function(result) {
+                $("#mapPlaceholder").html(result);
+                InitializeMap();
+            });            
+                        
         });
 
         $(window).scroll(function () {
@@ -79,14 +90,18 @@
 
 
         function OnMapItemClick(id) {
-            var modal = $('#bungalow_modal');
-            var modalTitle = $('#bungalow_modal_title');
-            var modalText = $('#bungalow_modal_text');
-            var modalImage = $('#bungalow_modal_image');
-            modalTitle.html('Бунгало №' + id);
-            modalText.html("информация за бунгалото");
-            modalImage.attr('src', "/img/bungalows/" + id + ".jpg");
-            modal.modal('show');
+            $.ajax({
+                url: "/home/getbungalowmodal",
+                data: { id: id },
+                method: "GET"
+            }).done(function(result) {
+                $("#bungalowModalPlaceholder").html(result);
+                var modal = $('#bungalow_modal');                         
+                var modalImage = $('#bungalow_modal_image');                           
+                modalImage.attr('src', "/img/bungalows/" + id + ".jpg");
+                modal.modal('show');
+            })
+            
         }
 
         function InitializeMap() {

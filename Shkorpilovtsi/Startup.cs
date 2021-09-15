@@ -43,6 +43,7 @@ namespace Shkorpilovtsi
             services.AddTransient<IDataService<Category>, CategoryService>();
             services.AddTransient<IDataService<Shift>, ShiftService>();
             services.AddTransient<IDataService<Price>, PriceService>();
+            services.AddTransient<IDataService<SpecialFee>, FeeService>();
             services.AddControllersWithViews();
         }
 
