@@ -13,12 +13,12 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label asp-for="Email"></label>
+                        <label asp-for="Email">И-мейл</label>
                         <input type="email" asp-for="Email" class="form-control form-control-sm" />
                         <span style="font-size: 0.8em" class="text-danger">@Html.ValidationMessageFor((m) => m.Email)</span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Password"></label>
+                        <label asp-for="Password">Парола</label>
                         <input type="password" asp-for="Password" class="form-control form-control-sm" />
                         <span style="font-size: 0.8em" class="text-danger">@Html.ValidationMessageFor((m) => m.Password)</span>
                     </div>

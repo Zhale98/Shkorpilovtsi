@@ -43,7 +43,7 @@ namespace Shkorpilovtsi.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Невалиден имейл!")]
             public string Email { get; set; }
 
             [Required]
