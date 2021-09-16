@@ -38,12 +38,12 @@ namespace Shkorpilovtsi.Controllers
             return PartialView("components/map", model);
         }
 
-        public async Task<PartialViewResult> GetBungalowModal(int id)
+        public async Task<PartialViewResult> GetBungalowModal(int number)
         {
-            var bungalow = await context.Bungalows.FindAsync(id);
+            var bungalow = await context.Bungalows.FirstOrDefaultAsync((o) => o.Number == number);
             var roomsInBungalow = await context.RoomsInBungalows
                 .Include((o) => o.Room)
-                .Where((r) => r.BungalowId == id).ToListAsync();
+                .Where((r) => r.BungalowId == bungalow.Id).ToListAsync();
             var bedsInRooms = await context.BedsInRooms.Include((o) => o.Bed).ToListAsync();
             var model = new BungalowViewModel()
             {

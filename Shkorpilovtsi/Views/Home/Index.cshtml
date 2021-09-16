@@ -89,16 +89,16 @@
         });
 
 
-        function OnMapItemClick(id) {
+        function OnMapItemClick(number) {
             $.ajax({
                 url: "/home/getbungalowmodal",
-                data: { id: id },
+                data: { number: number },
                 method: "GET"
             }).done(function(result) {
                 $("#bungalowModalPlaceholder").html(result);
                 var modal = $('#bungalow_modal');                         
                 var modalImage = $('#bungalow_modal_image');                           
-                modalImage.attr('src', "/img/bungalows/" + id + ".jpg");
+                modalImage.attr('src', "/img/bungalows/" + number + ".jpg");
                 modal.modal('show');
             })
             
@@ -113,8 +113,8 @@
         function SetEvents() {
             $('area[number]').click(function (e) {
                 e.preventDefault();
-                var id = $(this).attr('number');
-                OnMapItemClick(id);
+                var number = $(this).attr('number');
+                OnMapItemClick(number);
             });
             $('area[object]').click(function (e) {
                 e.preventDefault();

@@ -48,12 +48,16 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
                 else
                 {
                     ModelState.AddModelError("Password", result.Errors?.FirstOrDefault()?.Description);
+                    var categories = await context.Categories.ToListAsync();
+                    ViewData.Add("categories", categories);
                     return View(model);
                 }
             }
             else
             {
                 ModelState.AddModelError("EMail", "Има въведен потребител с това име");
+                var categories = await context.Categories.ToListAsync();
+                ViewData.Add("categories", categories);
                 return View(model);
             }
             return RedirectToAction(nameof(List));
