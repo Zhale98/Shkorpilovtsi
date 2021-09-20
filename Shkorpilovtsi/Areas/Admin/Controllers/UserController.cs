@@ -115,7 +115,7 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
             return RedirectToAction(nameof(List));
         }
         [Authorize(Roles = "Administrator")]
-        [HttpPost("Delete")]
+        [HttpGet("Delete")]
         public async Task<IActionResult> Delete(string id)
         {
             var user = await userManager.FindByIdAsync(id);
@@ -124,7 +124,8 @@ namespace Shkorpilovtsi.Areas.Admin.Controllers
             {
                 context.UserCategories.Remove(userCategory);
                 await context.SaveChangesAsync();
-            }                        
+            }
+            await userManager.DeleteAsync(user);
             return RedirectToAction(nameof(List));
         }
         [Authorize(Roles = "Administrator")]

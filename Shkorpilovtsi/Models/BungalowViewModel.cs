@@ -13,7 +13,7 @@ namespace Shkorpilovtsi.Models
         public string Coords { get; set; }
         public bool HasFridge { get; set; }
         public bool HasWc { get; set; }
-        public bool HasSofa { get; set; }
+        public bool HasSofa { get; set; }        
         public List<Room> Rooms {  get; set; }
         public List<BedsInRoom> BedsInRooms { get; set; }        
     }

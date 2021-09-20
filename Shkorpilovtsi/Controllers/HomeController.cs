@@ -38,6 +38,12 @@ namespace Shkorpilovtsi.Controllers
             return PartialView("components/map", model);
         }
 
+        public async Task<PartialViewResult> GetShifts()
+        {
+            var model = await context.Shifts.Where((s) => s.StartDate.Year == DateTime.Now.Year).ToListAsync();
+            return PartialView("components/shiftsSection", model);
+        }
+
         public async Task<PartialViewResult> GetBungalowModal(int number)
         {
             var bungalow = await context.Bungalows.FirstOrDefaultAsync((o) => o.Number == number);

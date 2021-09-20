@@ -1,0 +1,49 @@
+﻿@model List<Shift>
+
+<section id="shifts">
+    <div class="container">
+        <h2 class="text-center section_header">ГРАФИК НА СМЕНИТЕ</h2>
+        <div class="row col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            НОМЕР
+                        </th>
+                        <th>
+                            НАЧАЛНА ДАТА
+                        </th>
+                        <th>
+                            КРАЙНА ДАТА
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var shift in Model)
+                    {
+                        <tr>
+                            <td>
+                                @shift.Number
+                            </td>
+                            <td>
+                                @shift.StartDate.ToShortDateString()
+                            </td>
+                            <td>
+                                @shift.EndDate.ToShortDateString()
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-primary float-right" href="#">РЕЗЕРВИРАЙ</a>
+                            </td>
+                        </tr>
+                      }
+                </tbody>
+            </table>        
+
+        </div>
+        
+    </div>
+
+</section>

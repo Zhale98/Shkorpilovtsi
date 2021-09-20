@@ -11,6 +11,10 @@
 
 <partial name="components/aboutSection" />
 
+<div id="shiftsPlaceholder">
+
+</div>
+
 <div id="mapPlaceholder">
 
 </div>
@@ -44,6 +48,12 @@
                 slideMargin: 10,
             });
             $("#galleryDiv").justifiedGallery();
+            $.ajax({
+                url: "/home/getshifts",
+                method: "GET"
+            }).done(function(result) {
+                $("#shiftsPlaceholder").html(result);                
+            });      
             $.ajax({
                 url: "/home/getmap",
                 method: "GET"
