@@ -1,4 +1,8 @@
 ﻿@model SpecialFee
+@{
+    var shifts = (List<Shift>)ViewBag.shifts;
+    var categories = (List<Category>)ViewBag.categories;
+}
 
 <h3 class="pt-3">РЕДАКТИРАНЕ НА ТАКСА</h3>
 
@@ -9,8 +13,32 @@
         <input asp-for="Name" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Price"></label>
-        <input asp-for="Price" class="form-control" />
+        <label asp-for="ShiftId">ИЗБЕРИ СМЯНА</label>
+        <select asp-for="ShiftId" class="form-control">
+            <option value="@null">НЯМА</option>
+            @foreach (var shift in shifts)
+            {
+                <option value="@shift.Id">@shift.Number</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId">ИЗБЕРИ КАТЕГОРИЯ</label>
+        <select asp-for="CategoryId" class="form-control">
+            <option value="@null">НЯМА</option>
+            @foreach (var category in categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="SingleDayPrice"></label>
+        <input asp-for="SingleDayPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="FullPrice"></label>
+        <input asp-for="FullPrice" class="form-control" />
     </div>
     <div class="form-group">
         <a asp-action="list" asp-controller="fee" class="btn btn-secondary">НАЗАД</a>

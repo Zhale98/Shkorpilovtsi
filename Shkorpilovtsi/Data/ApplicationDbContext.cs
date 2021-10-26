@@ -34,8 +34,7 @@ namespace Shkorpilovtsi.Data
         public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<SpecialFee> SpecialFees { get; set; }
-
-        public virtual DbSet<Rezervation> Reservations { get; set; }
-        public virtual DbSet<RezervationDetail> RezervationDetails { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
+        public virtual DbSet<ReservationDetail> ReservationDetails { get; set; }
     }
 }

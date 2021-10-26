@@ -3,10 +3,6 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "font-awesome@5.15.4",
-      "destination": "wwwroot/lib/font-awesome/"
-    },
-    {
       "library": "image-map-resizer@1.0.10",
       "destination": "wwwroot/lib/image-map-resizer/"
     },
@@ -21,6 +17,22 @@
     {
       "library": "justifiedGallery@3.8.1",
       "destination": "wwwroot/lib/justifiedGallery/"
+    },
+    {
+      "library": "ion-rangeslider@2.3.1",
+      "destination": "wwwroot/lib/ion-rangeslider/"
+    },
+    {
+      "library": "font-awesome@5.15.4",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "jquery-easing@1.4.1",
+      "destination": "wwwroot/lib/jquery-easing/"
     }
   ]
 }

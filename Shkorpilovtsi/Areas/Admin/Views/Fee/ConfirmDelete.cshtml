@@ -8,8 +8,12 @@
     <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.Name</label>
 </div>
 <div class="form-group">
-    <label style="font-size: 1em;" asp-for="Price" class="col-3"></label>
-    <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.Price</label>
+    <label style="font-size: 1em;" asp-for="SingleDayPrice" class="col-3"></label>
+    <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.SingleDayPrice</label>
+</div>
+<div class="form-group">
+    <label style="font-size: 1em;" asp-for="FullPrice" class="col-3"></label>
+    <label style="font-size: 1em;" class="font-weight-bold col-8">@Model.FullPrice</label>
 </div>
 <div class="form-group">
     <a asp-action="list" asp-controller="fee" class="btn btn-secondary">НАЗАД</a>

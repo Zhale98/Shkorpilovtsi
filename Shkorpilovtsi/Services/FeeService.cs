@@ -53,7 +53,10 @@ namespace Shkorpilovtsi.Services
             if (entry != null)
             {
                 entry.Name = fee.Name;
-                entry.Price = fee.Price;
+                entry.SingleDayPrice = fee.SingleDayPrice;
+                entry.FullPrice = fee.FullPrice;
+                entry.CategoryId = fee.CategoryId;
+                entry.ShiftId = fee.ShiftId;
                 await context.SaveChangesAsync();
             }
             return entry;

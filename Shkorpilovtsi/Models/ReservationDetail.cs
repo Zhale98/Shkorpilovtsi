@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shkorpilovtsi.Models
 {
-    public class RezervationDetail
+    public class ReservationDetail
     {
         [Key]
         public int Id { get; set; }

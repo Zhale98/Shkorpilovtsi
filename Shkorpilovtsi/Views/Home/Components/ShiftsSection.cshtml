@@ -35,7 +35,7 @@
                                 @shift.EndDate.ToShortDateString()
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-primary float-right" href="#">РЕЗЕРВИРАЙ</a>
+                                <a class="btn btn-sm btn-primary float-right" asp-action="createbyshift" asp-controller="reservation" asp-route-id="@shift.Id">РЕЗЕРВИРАЙ</a>
                             </td>
                         </tr>
                       }

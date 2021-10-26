@@ -15,7 +15,7 @@
 
 </div>
 
-<div id="mapPlaceholder">
+<div id="mapPlaceholder" style="margin-top: 100px;">
 
 </div>
 
@@ -127,6 +127,9 @@
                 OnMapItemClick(number);
             });
             $('area[object]').click(function (e) {
+                e.preventDefault();
+            });
+            $('area[category]').click(function (e) {
                 e.preventDefault();
             });
             $("area[category]").mouseover(function (e) {

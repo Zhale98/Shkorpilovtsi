@@ -9,7 +9,8 @@
             <tr>
                 <th>№</th>
                 <th>ИМЕ</th>
-                <th>ЦЕНА</th>
+                <th>ЦЕНА ЗА ДЕН</th>
+                <th>ЦЕНА ЗА ЦЯЛАТА СМЯНА</th>
                 <ht></ht>
             </tr>
         </thead>
@@ -19,7 +20,8 @@
                 <tr>
                     <td>@(i + 1)</td>
                     <td>@Model[i].Name</td>
-                    <td >@Model[i].Price</td>
+                    <td >@Model[i].SingleDayPrice</td>
+                    <td >@Model[i].FullPrice</td>
                     <td>
                         <a class="btn btn-link" asp-action="Edit" asp-controller="fee" asp-route-id="@Model[i].Id"><i class="fa fa-edit"></i></a>
                         <a class="btn btn-link" asp-action="ConfirmDelete" asp-controller="fee" asp-route-id="@Model[i].Id"><i class="fa fa-trash"></i></a>

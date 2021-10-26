@@ -9,7 +9,7 @@ using Shkorpilovtsi.Data;
 namespace Shkorpilovtsi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210910130645_InitialCreate")]
+    [Migration("20210923173122_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -267,9 +267,6 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("MapCoords")
                         .HasColumnType("longtext");
 
@@ -279,6 +276,108 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Bungalows");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.Price", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("FullPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ShiftId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SingleDayPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ShiftId");
+
+                    b.ToTable("Prices");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.Reservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Approved")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("BungalowId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Cancelled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("ShiftId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.ReservationDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SpecialFeeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReservationDetails");
                 });
 
             modelBuilder.Entity("Shkorpilovtsi.Models.Room", b =>
@@ -326,6 +425,69 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("RoomsInBungalows");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.Shift", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Shifts");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.SpecialFee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("FullPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ShiftId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SingleDayPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SpecialFees");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.UserCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -396,6 +558,25 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.Navigation("Bed");
 
                     b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("Shkorpilovtsi.Models.Price", b =>
+                {
+                    b.HasOne("Shkorpilovtsi.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shkorpilovtsi.Models.Shift", "Shift")
+                        .WithMany()
+                        .HasForeignKey("ShiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Shift");
                 });
 
             modelBuilder.Entity("Shkorpilovtsi.Models.RoomsInBungalow", b =>

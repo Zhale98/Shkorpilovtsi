@@ -1,0 +1,88 @@
+﻿@model Reservation
+
+@{ 
+    var shifts = (List<Shift>)ViewBag.shifts;    
+    var bungalows = (List<Bungalow>)ViewBag.bungalows;
+}
+
+
+<div class="container mt-5">
+    <h3 class="m-3">НОВА РЕЗЕРВАЦИЯ</h3>
+    <div class="card shadow">
+        <div class="card-body">
+            <form asp-action="Index" method="post" asp-controller="reservation">
+                <input type="hidden" asp-for="@Model.StartDate" />
+                <input type="hidden" asp-for="@Model.EndDate" />
+                <div class="form-group">
+                    <label asp-for="ShiftId">ИЗБЕРИ СМЯНА</label>
+                    <select asp-for="ShiftId" class="form-control">
+                        @foreach (var shift in shifts)
+                        {
+                            <option value="@shift.Id" data-start="@shift.StartDate" data-end="@shift.EndDate">@shift.Number</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="formControlRange">ИЗБЕРИ ДНИ</label>
+                    <input type="range" class="form-control-range" id="selectDateRange">
+                </div>
+                <div class="form-group">
+                    <label asp-for="BungalowId">ИЗБЕРИ БУНГАЛО</label>
+                    <select asp-for="BungalowId" class="form-control">
+                        @foreach (var bungalow in bungalows)
+                        {
+                            <option value="@bungalow.Id">@bungalow.Number</option>
+                        }
+                    </select>
+                    <span class="text-danger">@Html.ValidationMessageFor((m) => m.BungalowId)</span>
+                </div>
+                <div class="form-group">                    
+                    <button type="submit" class="btn btn-primary">ПРОДЪЛЖИ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var dates = [];
+        $(document).ready(function () {
+            loadDates();
+        });
+        $("#selectDateRange").ionRangeSlider({
+            type: "double",
+            from: 0,
+            to: dates.length,
+            values: dates,
+            grid: true,
+            onChange: function (data) {
+                var fromIndex = data.from;
+                var toIndex = data.to;
+                $("#StartDate").val(dates[fromIndex]);
+                $("#EndDate").val(dates[toIndex]);                
+            }
+        });
+        $("#ShiftId").on("change", function () {
+            loadDates();
+        });
+
+        function loadDates() {
+            var opt = $("#ShiftId").find(":selected");
+            var startDate = new Date(Date.parse($(opt).attr("data-start")));
+            var endDate = new Date(Date.parse($(opt).attr("data-end")));
+            dates = [];
+            while (startDate < endDate) {
+                dates.push(startDate.toLocaleDateString());
+                startDate.setDate(startDate.getDate() + 1);
+            }
+            var data = $("#selectDateRange").data("ionRangeSlider");
+            data.update({
+                from: 0,
+                to: dates.length,
+                values: dates,
+            });
+        }
+    </script>
+
+}

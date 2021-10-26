@@ -1,0 +1,95 @@
+﻿@model Reservation
+@{
+    var shift = (Shift)ViewBag.shift;
+    var bungalow = (Bungalow)ViewBag.bungalow;
+    var roomsInBungalow = (List<RoomsInBungalow>)ViewBag.roomsInBungalow;
+    var bedsInRooms = (List<BedsInRoom>)ViewBag.bedsInRooms;
+    var categories = (List<Category>)ViewBag.categories;
+    var reservationDetails = (List<ReservationDetail>)ViewBag.reservationDetails;
+}
+
+<div class="container mt-5">
+    <h3 class="m-3">РЕЗЕРВАЦИЯТА БЕШЕ НАПРАВЕНА</h3>    
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="col-12">
+                <span class="font-weight-bold">СМЯНА:</span> @shift.Number 
+                от @((Model.StartDate ?? shift.StartDate).ToShortDateString()) до @((Model.EndDate ?? shift.EndDate).ToShortDateString())           
+            </div>
+            <div class="col-12">
+                <span class="font-weight-bold">БУНГАЛО №:</span> @bungalow.Number                 
+            </div>
+            <div class="col-12 mt-2">
+                @if (roomsInBungalow.Any((o) => o.Room.IsWc))
+                {
+                    <p class="ml-2"><fa class="fas fa-toilet ml-1 mr-1"></fa>САНИТАРЕН ВЪЗЕЛ</p>
+                }
+                @if (roomsInBungalow.Any((o) => o.Room.HasFridge))
+                {
+                    <p class="ml-2"><fa class="fas fa-snowflake ml-1 mr-1"></fa>ХЛАДИЛНИК</p>
+                }
+                @if (roomsInBungalow.Any((o) => o.Room.HasSofa))
+                {
+                    <p class="ml-2"><fa class="fas fa-couch ml-1 mr-1"></fa>РАЗТЕГАТЕЛЕН ДИВАН</p>
+                }
+                <p class="font-weight-bold">СТАИ:</p>
+                <ul class="list-unstyled ml-2">
+                    @foreach(var roomInBungalo in roomsInBungalow)
+                    {
+                        <li>@roomInBungalo.Room.Name - 
+                            <fa class="fas fa-bed ml-1 mr-1"></fa>
+                            @bedsInRooms.Where((o) => o.RoomId == roomInBungalo.RoomId).Sum((o) => o.Bed.Capacity)
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ИМЕ</th>
+                            <th>КАТЕГОРИЯ</th>
+                            <th>ЦЕНА С ДДС</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var detail in reservationDetails)
+                        {
+                            <tr>
+                                <td>@detail.Description</td>
+                                <td>@categories.FirstOrDefault((c) => c.Id == detail.CategoryId)?.Name</td>
+                                <td>@detail.Price</td>
+                                <td>
+                                    <a class="btn btn-link" asp-action="deletereservationdetail" asp-controller="reservation"
+                                    asp-route-reservationId="@Model.Id" asp-route-detailId="@detail.Id">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+            <h5 class="m-3 text-info">ДОБАВЯНЕ НА НОВО ЛИЦЕ</h5>
+            <form method="post" class="mt-3">
+                <input type="hidden" id="reservationId" value="@Model.Id" name="reservationId"/>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="ИМЕ И ФАМИЛИЯ" id="description" name="description">
+                    </div>
+                    <div class="col">
+                        <select class=form-control placeholder="КАТЕГОРИЯ" id="categoryId" name="categoryId">
+                            @foreach (var category in categories)
+                            {
+                                <option value="@category.Id">@category.Name</option>    
+                            }                            
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">ДОБАВИ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

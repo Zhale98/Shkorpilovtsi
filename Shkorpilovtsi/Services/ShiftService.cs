@@ -55,7 +55,7 @@ namespace Shkorpilovtsi.Services
             var entry = await ReadAsync(id);
             if (entry != null)
             {
-                entry.Number = shift.Number;
+                entry.Number = shift.Number;                
                 entry.StartDate = shift.StartDate;
                 entry.EndDate = shift.EndDate;
                 await context.SaveChangesAsync();

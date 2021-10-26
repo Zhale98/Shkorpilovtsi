@@ -11,10 +11,15 @@ namespace Shkorpilovtsi.Models
     {
         [Key]
         public int Id { get; set; }
+        public int? ShiftId { get; set; }
+        public int? CategoryId { get; set; }
         [Display(Name = "НАИМЕНОВАНИЕ")]
         public string Name { get; set; }
-        [Display(Name = "ЦЕНА")]
+        [Display(Name = "ЦЕНА ЗА ДЕН")]
         [Column(TypeName = "decimal(18,2)")]        
-        public decimal Price { get; set; }
+        public decimal SingleDayPrice { get; set; }
+        [Display(Name = "ЦЕНА ЗА ЦЯЛАТА СМЯНА")]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal FullPrice { get; set; }
     }
 }

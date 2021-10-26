@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
     <link rel="stylesheet" href="~/lib/lightslider/css/lightslider.css" />
     <link rel="stylesheet" href="~/lib/justifiedGallery/css/justifiedGallery.css" />
+    <link rel="stylesheet" href="~/lib/ion-rangeslider/css/ion.rangeSlider.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -20,14 +21,15 @@
     <footer>
         @RenderSection("footer", false)
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/lib/font-awesome/js/all.js"></script>
     <script src="~/lib/image-map-resizer/js/imageMapResizer.js"></script>
     <script src="~/lib/jquery-easing/jquery.easing.js"></script>
     <script src="~/lib/maphilight/jquery.maphilight.js"></script>
     <script src="~/lib/lightslider/js/lightslider.js"></script>
     <script src="~/lib/justifiedGallery/js/jquery.justifiedGallery.js"></script>
+    <script src="~/lib/ion-rangeslider/js/ion.rangeSlider.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

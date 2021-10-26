@@ -317,7 +317,7 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.ToTable("Prices");
                 });
 
-            modelBuilder.Entity("Shkorpilovtsi.Models.Rezervation", b =>
+            modelBuilder.Entity("Shkorpilovtsi.Models.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -335,13 +335,13 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("ShiftId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("UserId")
@@ -352,7 +352,7 @@ namespace Shkorpilovtsi.Data.Migrations
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("Shkorpilovtsi.Models.RezervationDetail", b =>
+            modelBuilder.Entity("Shkorpilovtsi.Models.ReservationDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -375,7 +375,7 @@ namespace Shkorpilovtsi.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RezervationDetails");
+                    b.ToTable("ReservationDetails");
                 });
 
             modelBuilder.Entity("Shkorpilovtsi.Models.Room", b =>
@@ -451,10 +451,19 @@ namespace Shkorpilovtsi.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("FullPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("Price")
+                    b.Property<int?>("ShiftId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SingleDayPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");

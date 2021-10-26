@@ -90,7 +90,6 @@ namespace Shkorpilovtsi.Data.Migrations
                     Number = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsAvailable = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     MapCoords = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -98,6 +97,62 @@ namespace Shkorpilovtsi.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bungalows", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ReservationDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ReservationId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    SpecialFeeId = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReservationDetails", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Reservations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BungalowId = table.Column<int>(type: "int", nullable: false),
+                    ShiftId = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Approved = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Cancelled = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reservations", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -118,6 +173,58 @@ namespace Shkorpilovtsi.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rooms", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Shifts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Number = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shifts", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "SpecialFees",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ShiftId = table.Column<int>(type: "int", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SingleDayPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    FullPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpecialFees", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "UserCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserCategories", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -302,6 +409,35 @@ namespace Shkorpilovtsi.Data.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Prices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ShiftId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    SingleDayPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    FullPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Prices_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Prices_Shifts_ShiftId",
+                        column: x => x.ShiftId,
+                        principalTable: "Shifts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -350,6 +486,16 @@ namespace Shkorpilovtsi.Data.Migrations
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Prices_CategoryId",
+                table: "Prices",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prices_ShiftId",
+                table: "Prices",
+                column: "ShiftId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RoomsInBungalows_BungalowId",
                 table: "RoomsInBungalows",
                 column: "BungalowId");
@@ -381,7 +527,22 @@ namespace Shkorpilovtsi.Data.Migrations
                 name: "BedsInRooms");
 
             migrationBuilder.DropTable(
+                name: "Prices");
+
+            migrationBuilder.DropTable(
+                name: "ReservationDetails");
+
+            migrationBuilder.DropTable(
+                name: "Reservations");
+
+            migrationBuilder.DropTable(
                 name: "RoomsInBungalows");
+
+            migrationBuilder.DropTable(
+                name: "SpecialFees");
+
+            migrationBuilder.DropTable(
+                name: "UserCategories");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -391,6 +552,12 @@ namespace Shkorpilovtsi.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Beds");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Shifts");
 
             migrationBuilder.DropTable(
                 name: "Bungalows");
